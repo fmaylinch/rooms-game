@@ -67,8 +67,11 @@ public class Main {
 
             Room destination = searchRoom(roomName, currentRoom.rooms);
 
-            System.out.println("Let's go to: " + destination);
-            currentRoom = destination;
+            if (destination == null) {
+                System.out.println("You can't go to: " + roomName);
+            } else {
+                currentRoom = destination;
+            }
         }
     }
 }
