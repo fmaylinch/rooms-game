@@ -2,17 +2,30 @@ package tech.bts.rooms;
 
 import java.util.*;
 
+/**
+ *
+ * Add another field in Room, called `exit`, which is a boolean
+ * that indicates if the room is an exit (to escape).
+ *
+ * Initialize that field in the constructor.
+ *
+ * For now, only one room is the exit (the white room).
+ *
+ * In the game (main method) you have to check if the player is in an exit room.
+ * If the player is in an exit room, you finish the game (you can use `break;` to exit the loop).
+ */
+
 public class Main {
 
     /** Creates the rooms, links them and returns the initial room */
     private static Room prepareRooms() {
 
-        Room red = new Room("red");
-        Room green = new Room("green");
-        Room blue = new Room("blue");
-        Room purple = new Room("purple");
-        Room yellow = new Room("yellow");
-        Room white = new Room("white");
+        Room red = new Room("red", false);
+        Room green = new Room("green", false);
+        Room blue = new Room("blue", false);
+        Room purple = new Room("purple", false);
+        Room yellow = new Room("yellow", false);
+        Room white = new Room("white", true);
 
         red.rooms = Arrays.asList(green);
         green.rooms = Arrays.asList(red, blue, purple);
@@ -71,6 +84,11 @@ public class Main {
                 System.out.println("You can't go to: " + roomName);
             } else {
                 currentRoom = destination;
+
+                if (currentRoom.exit) {
+                    System.out.println("You found the exit, well done, you won!");
+                    break;
+                }
             }
         }
     }
